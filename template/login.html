@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta>
+    <title>SIMPLY - UPLOAD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <header class="_header">
+        <div class="w-header">
+          <div class="lp-header">
+            SIMPLY-UPLOAD
+          </div>
+          <!-- end of lp header -->
+          <div class="rp-header">
+            Welcome Oladimillion / 
+            <a href="javascript:void">Logout</a>
+          </div>
+          <!-- end of rp header -->
+        </div>
+        <!-- end of w header -->
+      </header>
+
+      <div class="_loading" style="display: none">
+        <div class="_loading-icon">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div>
+      <!-- end of loading -->
+
+      <div class="msg-info clean">
+        <div class="message">This is a message</div>
+      </div>
+      <!-- end of msg info -->
+
+      <div 
+        style="display: none"
+        class="form login-form">
+        <form action="">
+          <div class="form-heading">
+            LOGIN
+          </div>
+          <!-- end of form heading -->
+          <div class="input-wrapper">
+            <input class="input" type="text"
+            placeholder="username">
+          </div>
+          <!-- end of input wrapper -->
+          <div class="helper-info">This field is required</div>
+          <!-- end of helper info -->
+          <div class="input-wrapper">
+            <input class="input" type="password"
+            placeholder="password">
+          </div>
+          <!-- end of input wrapper -->
+          <div class="helper-info">This field is required</div>
+          <!-- end of helper info -->
+          <div class="input-wrapper _flex">
+            <div class="_left">
+              <button type="submit" 
+                class="button login-btn">
+                Login
+              </button>
+            </div>
+            <!-- end of _left -->
+            <div class="_right">
+              or
+              <a class="_link" href="javascript:void">
+                register
+              </a>
+            </div>
+            <!-- end of _right -->
+          </div>
+          <!-- end of input wrapper -->
+        </form>
+      </div>
+      <!-- end of login form -->
+
+      <div
+        style="display: none"
+        class="form reg-form">
+        <form action="">
+          <div class="form-heading">
+            REGISTRATION
+          </div>
+          <!-- end of form heading -->
+          <div class="input-wrapper">
+            <input class="input" type="text"
+            placeholder="username">
+          </div>
+          <!-- end of input wrapper -->
+          <div class="helper-info">This field is required</div>
+          <!-- end of helper info -->
+          <div class="input-wrapper">
+            <input class="input" type="password"
+            placeholder="password">
+          </div>
+          <!-- end of input wrapper -->
+          <div class="helper-info">
+            This field is required. 4 characters minimum
+          </div>
+          <!-- end of helper info -->
+          <div class="input-wrapper">
+            <input class="input" type="password"
+            placeholder="confirm password">
+          </div>
+          <!-- end of input wrapper -->
+          <div class="helper-info">Passwords must match</div>
+          <!-- end of helper info -->
+          <div class="input-wrapper _flex">
+            <div class="_left">
+              <button type="submit" 
+                class="button login-btn">
+                Register
+              </button>
+            </div>
+            <!-- end of _left -->
+            <div class="_right">
+              or
+              <a class="_link" href="javascript:void">
+                login
+              </a>
+            </div>
+            <!-- end of _right -->
+          </div>
+          <!-- end of input wrapper -->
+        </form>
+      </div>
+      <!-- end of reg form -->
+
+      <div class="dashboard">
+        <div class="add-wrapper">
+          <label 
+            for="file"
+            class="button add-file">
+            Add File
+          </label>
+          <input type="file" id="file" name="file"
+          style="display: none">
+        </div>
+        <!-- end of add wrapper -->
+
+
+        <div class="cards-button">
+          <div class="card-btn active">
+            SAVED FILES
+          </div>
+          <!-- end of card btn -->
+          <div class="card-btn">
+            TRASHED FILES
+          </div>
+          <!-- end of card btn -->
+        </div>
+        <!-- end of cards header -->
+
+        <div class="cards-wrapper">
+          <ul class="cards">
+            <li class="card">
+              <div class="item">
+                <a 
+                  class="item-link" 
+                  target="_blank"
+                  href="javascript:void">
+                  <img 
+                  width="100%"
+                  height="auto"
+                  src="./dim.jpg" alt="test">
+                </a>
+              </div>
+              <!-- end of item -->
+              <div class="item-title">
+                item title
+              </div>
+              <!-- end of item title -->
+              <div class="item-del">
+                delete
+              </div>
+              <!-- end of item del -->
+            </li>
+            <li class="card">
+              <div class="item">
+                <a 
+                  class="item-link" 
+                  target="_blank"
+                  href="javascript:void">
+                  <img 
+                  width="100%"
+                  height="auto"
+                  src="./dim.jpg" alt="test">
+                </a>
+              </div>
+              <!-- end of item -->
+              <div class="item-title">
+                item title
+              </div>
+              <!-- end of item title -->
+              <div class="item-del">
+                delete
+              </div>
+              <!-- end of item del -->
+            </li>
+          </ul>
+        </div>
+        <!-- end of card wrapper -->
+
+      </div>
+      <!-- end of dashboard -->
+
+    </div>
+    <!-- end of wrapper -->
+
+  </body>
+</html>
