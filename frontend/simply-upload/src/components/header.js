@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class Header extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(){
+    this.props.logout();
+  }
+
   render() {
+
+    const {username} = this.props.user;
+
     return (
         <header className="_header">
           <div className="w-header">
@@ -9,10 +24,16 @@ class Header extends Component {
               SIMPLY-UPLOAD
             </div>
             {/* <!-- end of lp header --> */}
-            <div className="rp-header">
-              Welcome Oladimillion / &nbsp;
-              <a href="javascript:void">Logout</a>
-            </div>
+            {
+              username && <div className="rp-header">
+                Welcome {username} / &nbsp;
+                <a 
+                  onClick={this.logout}
+                  href="javascript:void">
+                  Logout
+                </a>
+              </div>
+            }
             {/* <!-- end of rp header --> */}
           </div>
           {/* <!-- end of w header --> */}
@@ -21,4 +42,11 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state){
+  return { 
+    user: state.User,
+  }
+}
+
+export default connect(mapStateToProps, {})(Header);
+

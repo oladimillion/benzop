@@ -8,7 +8,10 @@ const route = express.Router();
 route.use("/api/v1", Routes);
 
 route.get("*", (req, res) => {
-	return res.sendFile(path.join(__dirname, "../../client/index.html"));
+  return res.sendFile(
+    path.join(__dirname, 
+    "../build/index.html")
+  );
 });
 
 route.use((req, res) => {

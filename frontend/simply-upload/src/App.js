@@ -5,7 +5,6 @@ import {
 import { Provider } from "react-redux";
 import './App.css';
 
-import Header from "./components/header";
 import Login from "./components/login";
 import Register from "./components/register";
 import Dashboard from "./components/dashboard";
@@ -17,7 +16,6 @@ class App extends Component {
       <Provider store={this.props.store}>
         <Router>
           <div className="wrapper">
-            <Header />
             <Switch>
               <Route exact path="/" component={Login}/>
               <Route path="/register" component={Register}/>

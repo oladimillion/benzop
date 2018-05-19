@@ -6,7 +6,9 @@ import {
   UndoRemoveFileRequest,
   RetrieveFilesRequest,
 } from "../actions/actions";
+import { Logout } from "../actions/actions";
 import Loading from "./loading";
+import Header from "./header";
 import MsgInfo from "./msg-info";
 
 class Dashboard extends Component {
@@ -16,11 +18,11 @@ class Dashboard extends Component {
     super(props);
 
     this.state = { 
-      isLoading: false,
+      isLoading: true,
       info: null,
       files: [],
       _showSavedFiles: true,
-    }
+    };
 
     this.timerID = null;
     this.addFile = this.addFile.bind(this);
@@ -29,6 +31,7 @@ class Dashboard extends Component {
     this.toggleSavedFiles = this.toggleSavedFiles.bind(this);
     this.toggleTrashedFiles = this.toggleTrashedFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentWillMount(){
@@ -38,7 +41,6 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-    this.setState({isLoading: true});
     this.props.RetrieveFilesRequest()
       .then(data => {
         this.setState({
@@ -49,6 +51,18 @@ class Dashboard extends Component {
       .catch(data => {
         this.setState({isLoading: false});
       })
+  }
+
+  componentWillUnmount(){
+    if(this.timerID){
+      clearTimeout(this.timerID);
+      this.timerID = null;
+    }
+  }
+
+  logout(){
+    this.props.Logout();
+    this.props.history.replace("/", null);
   }
 
   addFile(e){
@@ -105,7 +119,7 @@ class Dashboard extends Component {
     this.timerID = setTimeout(()=> {
       this.setState({info: null});
       clearTimeout(this.timerID);
-    }, 4000);
+    }, 7000);
   }
 
   toggleFlag(_data, flag){
@@ -253,6 +267,7 @@ class Dashboard extends Component {
 
     return (
       <span>
+        <Header logout={this.logout} />
         {info && <MsgInfo info={info} />}
         {isLoading && <Loading />}
         {!isLoading && <div className="dashboard">
@@ -318,4 +333,5 @@ export default connect(null, {
   RemoveFileRequest,
   UndoRemoveFileRequest,
   RetrieveFilesRequest,
+  Logout,
 })(Dashboard);

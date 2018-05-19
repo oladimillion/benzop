@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 
 
 
-app.use(express.static(path.join(__dirname,  './../client')));
+app.use(express.static(path.join(__dirname,  './build')));
 app.use(express.static(path.join(__dirname,  './uploads')));
 // app.use(express.static(path.join(__dirname + './../template')));
 

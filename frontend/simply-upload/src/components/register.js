@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { RegRequest } from "../actions/actions";
 import { connect } from 'react-redux'
 import Loading from "./loading";
+import Header from "./header";
 import MsgInfo from "./msg-info";
 
 class Register extends Component {
@@ -33,6 +34,13 @@ class Register extends Component {
     }
   }
 
+  componentWillUnmount(){
+    if(this.timerID){
+      clearTimeout(this.timerID);
+      this.timerID = null;
+    }
+  }
+  
   validateInput(data){
     let username_error = false;
     let password_error = false;
@@ -77,7 +85,7 @@ class Register extends Component {
           password: "",
           cpassword: "",
         });
-        this.setOrClearInfo();
+        // this.setOrClearInfo();
       })
       .catch(data => {
         this.setState({isLoading: false, info: data.response.data});
@@ -95,7 +103,7 @@ class Register extends Component {
     this.timerID = setTimeout(()=> {
       this.setState({info: null});
       clearTimeout(this.timerID);
-    }, 4000);
+    }, 7000);
   }
 
   onChange(e){
@@ -116,82 +124,85 @@ class Register extends Component {
     } = this.state;
 
     return (
-      <div
-        className="form reg-form">
-        {info && <MsgInfo info={info} />}
-        {isLoading && <Loading />}
-        <form onSubmit={this.onSubmit}>
-          <div className="form-heading">
-            REGISTRATION
-          </div>
-          {/* <!-- end of form heading --> */}
-          <div className="input-wrapper">
-            <input 
-              onChange={ this.onChange }
-              value={username}
-              name="username"
-              className="input" type="text"
-              placeholder="username" />
-          </div>
-          {/* <!-- end of input wrapper --> */}
-          {
-            username_error && 
-              <div className="helper-info">
-                This field is required
-              </div>
-          }
-          {/* <!-- end of helper info --> */}
-          <div className="input-wrapper">
-            <input
-              onChange={ this.onChange }
-              value={password}
-              name="password"
-              className="input" type="password"
-              placeholder="password" />
-          </div>
-          {/* <!-- end of input wrapper --> */}
-          {
-            password_error && 
-              <div className="helper-info">
-                This field is required
-              </div>
-          }
-          {/* <!-- end of helper info --> */}
-          <div className="input-wrapper">
-            <input
-              onChange={ this.onChange }
-              value={cpassword}
-              name="cpassword"
-              className="input" type="password"
-              placeholder="confirm password" />
-          </div>
-          {/* <!-- end of input wrapper --> */}
-          {
-            cpassword_error && 
-              <div className="helper-info">
-                Passwords must match
-              </div>
-          }
-          {/* <!-- end of helper info --> */}
-          <div className="input-wrapper _flex">
-            <div className="_left">
-              <button type="submit" 
-                className="button login-btn">
-                Register
-              </button>
+      <span>
+        <Header />
+        <div
+          className="form reg-form">
+          {info && <MsgInfo info={info} />}
+          {isLoading && <Loading />}
+          <form onSubmit={this.onSubmit}>
+            <div className="form-heading">
+              REGISTRATION
             </div>
-            {/* <!-- end of _left --> */}
-            <div className="_right">
-              or
-              <Link className="_link" to="/">
-                &nbsp; login
-              </Link>
+            {/* <!-- end of form heading --> */}
+            <div className="input-wrapper">
+              <input 
+                onChange={ this.onChange }
+                value={username}
+                name="username"
+                className="input" type="text"
+                placeholder="username" />
             </div>
-            {/* <!-- end of _right --> */}
-          </div>
-          {/* <!-- end of input wrapper --> */}
-        </form>
-      </div>
+            {/* <!-- end of input wrapper --> */}
+            {
+              username_error && 
+                <div className="helper-info">
+                  This field is required
+                </div>
+            }
+            {/* <!-- end of helper info --> */}
+            <div className="input-wrapper">
+              <input
+                onChange={ this.onChange }
+                value={password}
+                name="password"
+                className="input" type="password"
+                placeholder="password" />
+            </div>
+            {/* <!-- end of input wrapper --> */}
+            {
+              password_error && 
+                <div className="helper-info">
+                  This field is required
+                </div>
+            }
+            {/* <!-- end of helper info --> */}
+            <div className="input-wrapper">
+              <input
+                onChange={ this.onChange }
+                value={cpassword}
+                name="cpassword"
+                className="input" type="password"
+                placeholder="confirm password" />
+            </div>
+            {/* <!-- end of input wrapper --> */}
+            {
+              cpassword_error && 
+                <div className="helper-info">
+                  Passwords must match
+                </div>
+            }
+            {/* <!-- end of helper info --> */}
+            <div className="input-wrapper _flex">
+              <div className="_left">
+                <button type="submit" 
+                  className="button login-btn">
+                  Register
+                </button>
+              </div>
+              {/* <!-- end of _left --> */}
+              <div className="_right">
+                or
+                <Link className="_link" to="/">
+                  &nbsp; login
+                </Link>
+              </div>
+              {/* <!-- end of _right --> */}
+            </div>
+            {/* <!-- end of input wrapper --> */}
+          </form>
+        </div>
+      </span>
     )
   }
 }

@@ -1,8 +1,9 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import SetAuthToken from "../auth-token";
 import  { USER } from "./types";
 
-const API = "http://localhost:8000";
+const API = "";
 
 export function SetCurrentUser(data){ 
   // saving user's data in the store
@@ -14,10 +15,9 @@ export function SetCurrentUser(data){
 
 export function Logout(){
   return dispatch => {
-    // removing token from local storage
-    localStorage.removeItem('token');
     // removing token to request headers
     SetAuthToken();
+    dispatch(SetCurrentUser({}));
   }
 }
 
@@ -25,7 +25,11 @@ export function LoginRequest(data){
   return dispatch => { 
     return axios.post(API + "/api/v1/signin", data)
       .then(data => {
-        SetAuthToken(data.token);
+        // console.log(data);
+        SetAuthToken(data.data.payload);
+        dispatch(
+          SetCurrentUser(jwtDecode(localStorage.getItem("token")))
+        );
         return data;
       })
   }

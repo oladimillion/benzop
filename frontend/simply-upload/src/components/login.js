@@ -4,6 +4,7 @@ import { LoginRequest } from "../actions/actions";
 import {  connect } from 'react-redux'
 import Loading from "./loading";
 import MsgInfo from "./msg-info";
+import Header from "./header";
 
 class Login extends Component {
 
@@ -28,6 +29,13 @@ class Login extends Component {
   componentWillMount(){
     if(localStorage.getItem("token")){
       this.props.history.replace("/dashboard", null);
+    }
+  }
+
+  componentWillUnmount(){
+    if(this.timerID){
+      clearTimeout(this.timerID);
+      this.timerID = null;
     }
   }
 
@@ -64,16 +72,18 @@ class Login extends Component {
     this.props.LoginRequest(data)
       .then(data => {
         this.setState({
-          isLoading: false, 
-          info: data.data,
           username: "",
           password: "",
         });
-        this.props.history.replace("/dashboard", null);
         this.setOrClearInfo();
+        this.setState({isLoading: false});
+        this.props.history.replace("/dashboard", null);
       })
       .catch(data => {
-        this.setState({isLoading: false, info: data.response.data});
+        this.setState({
+          isLoading: false, 
+          info: data.response.data
+        });
         this.setOrClearInfo();
       })
   }
@@ -87,7 +97,7 @@ class Login extends Component {
     this.timerID = setTimeout(()=> {
       this.setState({info: null});
       clearTimeout(this.timerID);
-    }, 4000);
+    }, 7000);
   }
 
   onChange(e){
@@ -106,66 +116,69 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <div 
-        className="form login-form">
-        {info && <MsgInfo info={info} />}
-        {isLoading && <Loading />}
-        <form onSubmit={this.onSubmit}>
-          <div className="form-heading">
-            LOGIN
-          </div>
-          {/* <!-- end of form heading --> */}
-          <div className="input-wrapper">
-            <input 
-              onChange={ this.onChange }
-              value={username}
-              name="username"
-              className="input" type="text"
-              placeholder="username" />
-          </div>
-          {/* <!-- end of input wrapper --> */}
-          {
-            username_error && 
-              <div className="helper-info">
-                This field is required
-              </div>
-          }
-          {/* <!-- end of helper info --> */}
-          <div className="input-wrapper">
-            <input
-              onChange={ this.onChange }
-              value={password}
-              name="password"
-              className="input" type="password"
-              placeholder="password" />
-          </div>
-          {/* <!-- end of input wrapper --> */}
-          {
-            password_error && 
-              <div className="helper-info">
-                This field is required
-              </div>
-          }
-          {/* <!-- end of helper info --> */}
-          <div className="input-wrapper _flex">
-            <div className="_left">
-              <button type="submit" 
-                className="button login-btn">
-                Login
-              </button>
+      <span>
+        <Header />
+        <div 
+          className="form login-form">
+          {info && <MsgInfo info={info} />}
+          {isLoading && <Loading />}
+          <form onSubmit={this.onSubmit}>
+            <div className="form-heading">
+              LOGIN
             </div>
-            {/* <!-- end of _left --> */}
-            <div className="_right">
-              or
-              <Link className="_link" to="/register">
-                &nbsp; register
-              </Link>
+            {/* <!-- end of form heading --> */}
+            <div className="input-wrapper">
+              <input 
+                onChange={ this.onChange }
+                value={username}
+                name="username"
+                className="input" type="text"
+                placeholder="username" />
             </div>
-            {/* <!-- end of _right --> */}
-          </div>
-          {/* <!-- end of input wrapper --> */}
-        </form>
-      </div>
+            {/* <!-- end of input wrapper --> */}
+            {
+              username_error && 
+                <div className="helper-info">
+                  This field is required
+                </div>
+            }
+            {/* <!-- end of helper info --> */}
+            <div className="input-wrapper">
+              <input
+                onChange={ this.onChange }
+                value={password}
+                name="password"
+                className="input" type="password"
+                placeholder="password" />
+            </div>
+            {/* <!-- end of input wrapper --> */}
+            {
+              password_error && 
+                <div className="helper-info">
+                  This field is required
+                </div>
+            }
+            {/* <!-- end of helper info --> */}
+            <div className="input-wrapper _flex">
+              <div className="_left">
+                <button type="submit" 
+                  className="button login-btn">
+                  Login
+                </button>
+              </div>
+              {/* <!-- end of _left --> */}
+              <div className="_right">
+                or
+                <Link className="_link" to="/register">
+                  &nbsp; register
+                </Link>
+              </div>
+              {/* <!-- end of _right --> */}
+            </div>
+            {/* <!-- end of input wrapper --> */}
+          </form>
+        </div>
+      </span>
     )
   }
 }
