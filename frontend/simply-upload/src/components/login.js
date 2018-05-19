@@ -76,7 +76,6 @@ class Login extends Component {
         this.setState({isLoading: false, info: data.response.data});
         this.setOrClearInfo();
       })
-
   }
 
   setOrClearInfo(){

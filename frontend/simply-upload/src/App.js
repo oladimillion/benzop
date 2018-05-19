@@ -11,9 +11,6 @@ import Register from "./components/register";
 import Dashboard from "./components/dashboard";
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
 
   render() {
     return (

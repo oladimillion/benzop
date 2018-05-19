@@ -27,6 +27,12 @@ class Register extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentWillMount(){
+    if(localStorage.getItem("token")){
+      this.props.history.replace("/dashboard", null);
+    }
+  }
+
   validateInput(data){
     let username_error = false;
     let password_error = false;

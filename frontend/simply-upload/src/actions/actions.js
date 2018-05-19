@@ -23,7 +23,6 @@ export function Logout(){
 
 export function LoginRequest(data){ 
   return dispatch => { 
-    // making log in request to server
     return axios.post(API + "/api/v1/signin", data)
       .then(data => {
         SetAuthToken(data.token);
@@ -34,35 +33,30 @@ export function LoginRequest(data){
 
 export function RegRequest(data){ 
   return dispatch => { 
-    // making registration request to server
     return axios.post(API + "/api/v1/signup", data)
   }
 }
 
 export function AddFileRequest(data){ 
   return dispatch => { 
-    // making registration request to server
     return axios.post(API + "/api/v1/add-file", data)
   }
 }
 
 export function RemoveFileRequest(data){ 
   return dispatch => { 
-    // making registration request to server
     return axios.put(API + "/api/v1/remove-file", data)
   }
 }
 
 export function UndoRemoveFileRequest(data){ 
   return dispatch => { 
-    // making registration request to server
     return axios.put(API + "/api/v1/undo-remove-file", data)
   }
 }
 
 export function RetrieveFilesRequest(){ 
   return dispatch => { 
-    // making registration request to server
     return axios.get(API + "/api/v1/retrieve-files")
   }
 }
